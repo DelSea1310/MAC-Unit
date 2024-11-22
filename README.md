@@ -4,6 +4,7 @@ El proyecto se centra en el diseño de un microprocesador basado en la arquitect
 
 El valor de MAC_OUT se obtiene tomando los bits [31:16] del acumulado (MAC_ACC). Sin embargo, si el registro de desplazamiento (MAC_SHIFTER) contiene un valor específico, la salida será desplazada hacia la izquierda hasta alcanzar un máximo definido en los bits [24:9] del acumulado. Cabe destacar que el módulo solo inicia la multiplicación cuando el bit de inicio (MAC_START) está activado (en 1). Mientras este bit permanezca desactivado (0), el módulo estará inactivo. Una vez activado, ejecutará la operación y se bloqueará hasta recibir una nueva instrucción. Además, si el bit MAC_I_MSK está activo, el módulo enviará una interrupción al usuario para notificar la finalización de la operación. Por último, si el bit de encendido (MAC_ON) no está en 1, el módulo permanecerá apagado.
 
+![image alt](https://drive.google.com/uc?id=1_srFWBWl9kfJeGSkfZ6Dztm20vS-jZ4I)
 ![image alt](https://drive.google.com/file/d/1_srFWBWl9kfJeGSkfZ6Dztm20vS-jZ4I/view?usp=drive_link)
 ![image alt](https://drive.google.com/file/d/1_vFxtTHUk_yZm5k5P_Hkz_te0_Bbcdwo/view?usp=drive_link)
 ![image alt](https://drive.google.com/file/d/1_vOolHD9m0_w-UgA7Rt80xSJk0iVyDVJ/view?usp=drive_link)
