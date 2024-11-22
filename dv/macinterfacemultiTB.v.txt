@@ -1,0 +1,52 @@
+`timescale 1ps / 1ps 
+module macinterface_tb;
+
+  reg clk;
+  reg reset;
+  reg write_enable;
+  reg [31:0]data_in;
+  reg [7:0]addr;
+  
+  wire [31:0] data_out;
+  wire IRQ_MAC;
+  
+  mac_interface uut_mac_interface(.clk(clk),.reset(reset),.write_enable(write_enable),.data_in(data_in),.addr(addr),.data_out(data_out),.IRQ_MAC(IRQ_MAC));
+  always
+  begin 
+          #4 clk=!clk; 
+  end 
+  initial 
+     begin 
+       clk=1'b0;
+       reset=1'b1;
+       $dumpfile("macinterfacemulti.vcd"); 
+       $dumpvars;
+       $monitor($time, "clk=%b, reset=%b, write_enable=%b, data_in=%b, addr=%b, data_out=%b, IRQ_MAC=%b", clk, reset, write_enable, data_in, addr, data_out, IRQ_MAC);
+       write_enable =1'b0;
+       data_in = 32'b0;
+       addr = 8'b00100100;
+       #5 reset = 1'b0;
+       #1 addr = 8'b00101001;
+       #2 data_in = 32'b10000101;
+       #2 write_enable = 1'b1;
+       #4 write_enable = 1'b0;
+       #1 addr = 8'b00100100;
+       #1 data_in = 32'b101011011001110;
+       #2 write_enable = 1'b1;
+       #4 write_enable = 1'b0;
+       #1 addr = 8'b00100101;
+       #1 data_in = 32'b101011011001110;
+       #2 write_enable = 1'b1;
+       #4 write_enable = 1'b0;  //30
+       #1 addr = 8'b00101001;
+       #1 data_in = 32'b10000111;
+       #2 write_enable = 1'b1;
+       #4 write_enable = 1'b0;
+       #184 addr = 8'b00100110;        //42
+       #24 addr = 8'b00100111;
+       #24 addr = 8'b00101000;   
+       #24
+       $finish;
+       
+     end 
+endmodule
